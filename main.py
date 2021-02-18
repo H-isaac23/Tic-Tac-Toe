@@ -22,6 +22,14 @@ class TicTacToe:
             if i < 2:
                 print(11 * '-')
 
-                    
+    def is_filled(self, slot):
+        if slot != " ":
+            print("The slot if already filled in.")
+            return False
+        return True
+
+
+
 game = TicTacToe()
 game.draw_board()
+# game.is_filled(game.tl)

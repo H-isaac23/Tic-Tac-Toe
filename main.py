@@ -2,6 +2,7 @@ class TicTacToe:
     def __init__(self):
         self.player_inputs = []
         self.input_counter = 0
+        self.game_play = True
         self.tl = " "
         self.t = " "
         self.tr = " "
@@ -30,7 +31,7 @@ class TicTacToe:
         return False
 
     def fill_slot(self):
-        while self.input_counter < 9:
+        while self.input_counter < 9 and self.game_play:
 
             print()
             slot = int(input("Please choose a slot to fill in: "))
@@ -109,14 +110,26 @@ class TicTacToe:
                     self.input_counter += 1
                     self.draw_board()
 
+            self.check_win_status()
+
     def update_board(self):
         self.board = [[f" {self.tl} |", f" {self.t} |", f" {self.tr} "],
                       [f" {self.ml} |", f" {self.m} |", f" {self.mr} "],
                       [f" {self.dl} |", f" {self.d} |", f" {self.dr} "]]
+
+    def check_win_status(self):
+        if ((self.tl == self.t and self.t == self.tr and self.tl != " ") or
+            (self.ml == self.m and self.m == self.mr and self.ml != " ") or
+            (self.dl == self.d and self.d == self.dr and self.dl != " ") or
+            (self.tl == self.ml and self.ml == self.dl and self.tl != " ") or
+            (self.t == self.m and self.m == self.d and self.d != " ") or
+            (self.tr == self.mr and self.mr == self.dr and self.dr != " ") or
+            (self.tl == self.m and self.m == self.dr and self.tl != " ") or
+        (self.tr == self.m and self.m == self.dl and self.tr != " ")):
+            self.game_play = False
 
 
 game = TicTacToe()
 # game.draw_board()
 game.fill_slot()
 # game.draw_board()
-

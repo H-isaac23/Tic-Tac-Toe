@@ -142,13 +142,13 @@ class TicTacToe:
                 self.random_slot_picker()
             self.slot_obj[i] = " "
 
-    # def random_slot_picker(self):
-    #     while True:
-    #         num = random.randint(0, 8)
-    #         if self.slot_obj[num] == " ":
-    #             self.slot_obj[num] = "o"
-    #             self.input_counter += 1
-    #             break
+    def random_slot_picker(self):
+        while True:
+            num = random.randint(0, 8)
+            if self.slot_obj[num] == " ":
+                self.slot_obj[num] = "o"
+                self.input_counter += 1
+                break
 
 
 

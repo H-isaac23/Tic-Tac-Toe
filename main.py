@@ -1,5 +1,5 @@
 import random
-
+import sys
 
 class TicTacToe:
     def __init__(self):
@@ -167,6 +167,36 @@ class TicTacToe:
                 self.draw_board()
                 break
 
+    def game_manager(self):
+        print("Welcome to a Tic-Tac-Toe game created by Isaac.")
+        print("Would you like to play?")
+        print("[1] Yes")
+        print("[2] No")
+        ans = int(input("Pick a number: "))
+        if ans == 1:
+            while True:
+                self.game_start()
+                print("Would you like to play again?")
+                print("[1] Yes")
+                print("[2] No")
+                answer = int(input("Pick a number: "))
+                if answer == 2:
+                    print("Thank you for playing!")
+                    break
+                elif answer == 1:
+                    print("Starting the game...")
+                    self.input_counter = 0
+                    self.game_play = True
+                    self.slot_obj = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+                else:
+                    print("Invalid input. Terminating the program.")
+                    sys.exit()
+        elif ans == 2:
+            print("Come play again!")
+        else:
+            print("Invalid input. Terminating the program.")
+            sys.exit()
+
 
 game = TicTacToe()
-game.game_start()
+game.game_manager()

@@ -6,15 +6,7 @@ class TicTacToe:
         self.slot_obj = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
         self.input_counter = 0
         self.game_play = True
-        self.slot_obj[0] = " "
-        self.t = " "
-        self.tr = " "
-        self.ml = " "
-        self.m = " "
-        self.mr = " "
-        self.dl = " "
-        self.d = " "
-        self.dr = " "
+        self.digits = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
         self.board = [[f" {self.slot_obj[0]} |", f" {self.slot_obj[1]} |", f" {self.slot_obj[2]} "],
                       [f" {self.slot_obj[3]} |", f" {self.slot_obj[4]} |", f" {self.slot_obj[5]} "],
                       [f" {self.slot_obj[6]} |", f" {self.slot_obj[7]} |", f" {self.slot_obj[8]} "]]
@@ -39,10 +31,12 @@ class TicTacToe:
             if self.input_counter%2 == 0:
 
                 print()
-                slot = int(input("Please choose a slot to fill in: "))
+                slot = input("Please choose a slot to fill in: ")
                 print()
 
-                if slot == 1:
+                if slot not in self.digits:
+                    print("Please choose from 1-9.")
+                elif slot == "1":
                     if self.is_filled(self.slot_obj[0]):
                         print("The slot if already filled in. Please choose another slot.")
                     else:
@@ -50,7 +44,7 @@ class TicTacToe:
                         self.update_board()
                         self.input_counter += 1
                         self.draw_board()
-                if slot == 2:
+                elif slot == "2":
                     if self.is_filled(self.slot_obj[1]):
                         print("The slot if already filled in. Please choose another slot.")
                     else:
@@ -58,7 +52,7 @@ class TicTacToe:
                         self.update_board()
                         self.input_counter += 1
                         self.draw_board()
-                if slot == 3:
+                elif slot == "3":
                     if self.is_filled(self.slot_obj[2]):
                         print("The slot if already filled in. Please choose another slot.")
                     else:
@@ -66,7 +60,7 @@ class TicTacToe:
                         self.update_board()
                         self.input_counter += 1
                         self.draw_board()
-                if slot == 4:
+                elif slot == "4":
                     if self.is_filled(self.slot_obj[3]):
                         print("The slot if already filled in. Please choose another slot.")
                     else:
@@ -74,7 +68,7 @@ class TicTacToe:
                         self.update_board()
                         self.input_counter += 1
                         self.draw_board()
-                if slot == 5:
+                elif slot == "5":
                     if self.is_filled(self.slot_obj[4]):
                         print("The slot if already filled in. Please choose another slot.")
                     else:
@@ -82,7 +76,7 @@ class TicTacToe:
                         self.update_board()
                         self.input_counter += 1
                         self.draw_board()
-                if slot == 6:
+                elif slot == "6":
                     if self.is_filled(self.slot_obj[5]):
                         print("The slot if already filled in. Please choose another slot.")
                     else:
@@ -90,7 +84,7 @@ class TicTacToe:
                         self.update_board()
                         self.input_counter += 1
                         self.draw_board()
-                if slot == 7:
+                elif slot == "7":
                     if self.is_filled(self.slot_obj[6]):
                         print("The slot if already filled in. Please choose another slot.")
                     else:
@@ -98,7 +92,7 @@ class TicTacToe:
                         self.update_board()
                         self.input_counter += 1
                         self.draw_board()
-                if slot == 8:
+                elif slot == "8":
                     if self.is_filled(self.slot_obj[7]):
                         print("The slot if already filled in. Please choose another slot.")
                     else:
@@ -106,7 +100,7 @@ class TicTacToe:
                         self.update_board()
                         self.input_counter += 1
                         self.draw_board()
-                if slot == 9:
+                elif slot == "9":
                     if self.is_filled(self.slot_obj[8]):
                         print("The slot if already filled in. Please choose another slot.")
                     else:
@@ -141,6 +135,14 @@ class TicTacToe:
     def opponent_ai_move(self):
         for i in range(9):
             temp = self.slot_obj[i]
+            self.slot_obj[i] = "o"
+            if not self.check_win_status() and not self.is_filled(temp):
+                self.slot_obj[i] = "o"
+                self.input_counter += 1
+                self.update_board()
+                self.draw_board()
+                break
+
             self.slot_obj[i] = "x"
             if not self.check_win_status() and not self.is_filled(temp):
                 self.slot_obj[i] = "o"
@@ -152,6 +154,7 @@ class TicTacToe:
                 self.slot_obj[i] = temp
                 self.random_slot_picker()
                 break
+
             self.slot_obj[i] = temp
 
     def random_slot_picker(self):
@@ -165,8 +168,5 @@ class TicTacToe:
                 break
 
 
-
 game = TicTacToe()
-# game.draw_board()
 game.game_start()
-# game.draw_board()

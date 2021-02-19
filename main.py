@@ -119,6 +119,9 @@ class TicTacToe:
                 self.opponent_ai_move()
 
             self.game_play = self.check_win_status()
+            if self.input_counter == 9:
+                print("It's a draw!")
+                print()
 
     def update_board(self):
         self.board = [[f" {self.slot_obj[0]} |", f" {self.slot_obj[1]} |", f" {self.slot_obj[2]} "],
@@ -138,6 +141,12 @@ class TicTacToe:
         return True
 
     def opponent_ai_move(self):
+
+        opp_won = self.check_opp_win_status()
+        if not opp_won:
+            self.check_player_win_status()
+
+    def check_opp_win_status(self):
         for i in range(9):
             temp = self.slot_obj[i]
             self.slot_obj[i] = "o"
@@ -148,8 +157,13 @@ class TicTacToe:
                 self.draw_board()
                 print("Sorry! You're opponent won.")
                 print()
-                break
+                return True
+            self.slot_obj[i] = temp
+        return False
 
+    def check_player_win_status(self):
+        for i in range(9):
+            temp = self.slot_obj[i]
             self.slot_obj[i] = "x"
             if not self.check_win_status() and not self.is_filled(temp):
                 self.slot_obj[i] = "o"

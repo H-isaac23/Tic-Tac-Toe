@@ -33,7 +33,7 @@ class TicTacToe:
             return True
         return False
 
-    def fill_slot(self):
+    def game_start(self):
         while self.input_counter < 9 and self.game_play:
 
             if self.input_counter%2 == 0:
@@ -115,6 +115,8 @@ class TicTacToe:
                         self.input_counter += 1
                         self.draw_board()
             else:
+                print("Opponent's move:")
+                print()
                 self.opponent_ai_move()
 
             self.game_play = self.check_win_status()
@@ -166,5 +168,5 @@ class TicTacToe:
 
 game = TicTacToe()
 # game.draw_board()
-game.fill_slot()
+game.game_start()
 # game.draw_board()

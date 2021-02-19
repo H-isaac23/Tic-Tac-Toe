@@ -1,5 +1,5 @@
 import random
-
+import sys
 
 class TicTacToe:
     def __init__(self):
@@ -108,12 +108,20 @@ class TicTacToe:
                         self.update_board()
                         self.input_counter += 1
                         self.draw_board()
+
+                if not self.check_win_status():
+                    print("You won!")
+                    print()
+
             else:
                 print("Opponent's move:")
                 print()
                 self.opponent_ai_move()
 
             self.game_play = self.check_win_status()
+            if self.input_counter == 9:
+                print("It's a draw!")
+                print()
 
     def update_board(self):
         self.board = [[f" {self.slot_obj[0]} |", f" {self.slot_obj[1]} |", f" {self.slot_obj[2]} "],
@@ -133,6 +141,12 @@ class TicTacToe:
         return True
 
     def opponent_ai_move(self):
+
+        opp_won = self.check_opp_win_status()
+        if not opp_won:
+            self.check_player_win_status()
+
+    def check_opp_win_status(self):
         for i in range(9):
             temp = self.slot_obj[i]
             self.slot_obj[i] = "o"
@@ -141,8 +155,15 @@ class TicTacToe:
                 self.input_counter += 1
                 self.update_board()
                 self.draw_board()
-                break
+                print("Sorry! You're opponent won.")
+                print()
+                return True
+            self.slot_obj[i] = temp
+        return False
 
+    def check_player_win_status(self):
+        for i in range(9):
+            temp = self.slot_obj[i]
             self.slot_obj[i] = "x"
             if not self.check_win_status() and not self.is_filled(temp):
                 self.slot_obj[i] = "o"
@@ -167,6 +188,36 @@ class TicTacToe:
                 self.draw_board()
                 break
 
+    def game_manager(self):
+        print("Welcome to a Tic-Tac-Toe game created by Isaac.")
+        print("Would you like to play?")
+        print("[1] Yes")
+        print("[2] No")
+        ans = int(input("Pick a number: "))
+        if ans == 1:
+            while True:
+                self.game_start()
+                print("Would you like to play again?")
+                print("[1] Yes")
+                print("[2] No")
+                answer = int(input("Pick a number: "))
+                if answer == 2:
+                    print("Thank you for playing!")
+                    break
+                elif answer == 1:
+                    print("Starting the game...")
+                    self.input_counter = 0
+                    self.game_play = True
+                    self.slot_obj = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+                else:
+                    print("Invalid input. Terminating the program.")
+                    sys.exit()
+        elif ans == 2:
+            print("Come play again!")
+        else:
+            print("Invalid input. Terminating the program.")
+            sys.exit()
+
 
 game = TicTacToe()
-game.game_start()
+game.game_manager()

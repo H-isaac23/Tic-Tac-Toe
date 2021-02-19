@@ -108,6 +108,11 @@ class TicTacToe:
                         self.update_board()
                         self.input_counter += 1
                         self.draw_board()
+
+                if not self.check_win_status():
+                    print("You won!")
+                    print()
+
             else:
                 print("Opponent's move:")
                 print()
@@ -141,6 +146,8 @@ class TicTacToe:
                 self.input_counter += 1
                 self.update_board()
                 self.draw_board()
+                print("Sorry! You're opponent won.")
+                print()
                 break
 
             self.slot_obj[i] = "x"

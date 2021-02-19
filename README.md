@@ -19,5 +19,8 @@ Here are the goals that I want to be able to do for this project.
 Ideas for improvement are welcome, just open an issue and I will take a look at the idea on whether I would implement it or not.
 As for the code, I prefer doing it myself, so yeah.
 
+## Libraries Used
+-random
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
